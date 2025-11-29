@@ -12,6 +12,7 @@ public class App {
 		while (true) {
 			System.out.println("\n======== CONTACT MANAGER ========");
 			System.out.println("1. Add Contact");
+			 System.out.println("2. Update Phone");
 
 			System.out.print("Enter your choice: ");
 
@@ -37,7 +38,19 @@ public class App {
 					Contact contact = new Contact(id, name, number, email);
 					dao.addContact(contact);
 					break;
-
+			   
+				case 2 :
+					System.out.println("Enter ID : ");
+					int uid = scanner.nextInt();
+					
+					scanner.nextLine();
+					
+					System.out.print("Enter New Phone: ");
+                    String newNum = scanner.nextLine();
+                    
+                    dao.updateNumber(uid, newNum);
+                    break;
+					
 			}
 
 		}

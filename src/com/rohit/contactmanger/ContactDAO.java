@@ -25,4 +25,23 @@ public class ContactDAO {
 			e.printStackTrace();
 		}
 	}
+
+	public void updateNumber(int id, String newNum) {
+		Connection connection = DBConnection.getConnection();
+		try {
+			String query = "UPDATE contacts SET phone=? WHERE id=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, newNum);
+			preparedStatement.setInt(2, id);
+
+			int i = preparedStatement.executeUpdate();
+			
+			if (i > 0)
+				System.out.println("Phone Updated Successfully!");
+			else
+				System.out.println("No Contact Found with ID: " + id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
