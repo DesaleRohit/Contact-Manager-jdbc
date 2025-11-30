@@ -1,6 +1,9 @@
-package com.rohit.contactmanger;
+package com.rohit.contactmanger.main;
 
 import java.util.Scanner;
+
+import com.rohit.contactmanger.dao.ContactDAO;
+import com.rohit.contactmanger.model.Contact;
 
 public class App {
 

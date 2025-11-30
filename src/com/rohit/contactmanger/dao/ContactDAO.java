@@ -1,7 +1,11 @@
-package com.rohit.contactmanger;
+package com.rohit.contactmanger.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
+
+import com.rohit.contactmanger.db.DBConnection;
+import com.rohit.contactmanger.model.Contact;
 
 public class ContactDAO {
 
