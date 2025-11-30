@@ -1,4 +1,4 @@
-package com.rohit.contactmanger;
+package com.rohit.contactmanger.db;
 
 import java.sql.Connection;
 import java.sql.Driver;

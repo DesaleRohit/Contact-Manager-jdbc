@@ -1,4 +1,4 @@
-package com.rohit.contactmanger;
+package com.rohit.contactmanger.model;
 
 public class Contact {
 	private int id;
