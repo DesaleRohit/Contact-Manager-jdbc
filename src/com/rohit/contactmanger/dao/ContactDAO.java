@@ -21,10 +21,12 @@ public class ContactDAO {
 
 			int i = preparedStatement.executeUpdate();
 
-			if (i > 0)
+			if (i > 0) {
 				System.out.println("Contact Added Successfully!");
-			else
+			}
+			else { 
 				System.out.println("Failed to Add Contact!");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,12 +42,34 @@ public class ContactDAO {
 
 			int i = preparedStatement.executeUpdate();
 			
-			if (i > 0)
+			if (i > 0) {
 				System.out.println("Phone Updated Successfully!");
-			else
+			}
+			else {
 				System.out.println("No Contact Found with ID: " + id);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void deleteContact(int id) {
+		Connection  connection = DBConnection.getConnection();
+		try {
+			String query = "DELETE FROM contacts WHERE id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			
+			int i = preparedStatement.executeUpdate();
+			
+			if (i > 0) {
+				System.out.println("Contact Deleted Successfully");
+			}
+			 else {
+				System.out.println("No Contact Found with ID : "+ id);
+			 }
+		} catch (Exception e) {
+			
 		}
 	}
 }
