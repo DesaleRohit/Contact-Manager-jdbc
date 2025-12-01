@@ -2,6 +2,7 @@ package com.rohit.contactmanger.main;
 
 import java.util.Scanner;
 
+
 import com.rohit.contactmanger.dao.ContactDAO;
 import com.rohit.contactmanger.model.Contact;
 
@@ -15,7 +16,8 @@ public class App {
 		while (true) {
 			System.out.println("\n======== CONTACT MANAGER ========");
 			System.out.println("1. Add Contact");
-			 System.out.println("2. Update Phone");
+			System.out.println("2. Update Phone");
+			System.out.println("3. Delete Contact");
 
 			System.out.print("Enter your choice: ");
 
@@ -54,6 +56,12 @@ public class App {
                     dao.updateNumber(uid, newNum);
                     break;
 					
+				case 3 :
+					System.out.println("Enter ID : ");
+					int did = scanner.nextInt();
+					
+					dao.deleteContact(did);
+					break;
 			}
 
 		}
