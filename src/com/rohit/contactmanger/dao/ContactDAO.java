@@ -3,6 +3,7 @@ package com.rohit.contactmanger.dao;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.rohit.contactmanger.db.DBConnection;
 import com.rohit.contactmanger.model.Contact;
@@ -23,8 +24,7 @@ public class ContactDAO {
 
 			if (i > 0) {
 				System.out.println("Contact Added Successfully!");
-			}
-			else { 
+			} else {
 				System.out.println("Failed to Add Contact!");
 			}
 		} catch (Exception e) {
@@ -41,35 +41,58 @@ public class ContactDAO {
 			preparedStatement.setInt(2, id);
 
 			int i = preparedStatement.executeUpdate();
-			
+
 			if (i > 0) {
 				System.out.println("Phone Updated Successfully!");
-			}
-			else {
+			} else {
 				System.out.println("No Contact Found with ID: " + id);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void deleteContact(int id) {
-		Connection  connection = DBConnection.getConnection();
+		Connection connection = DBConnection.getConnection();
 		try {
 			String query = "DELETE FROM contacts WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, id);
-			
+
 			int i = preparedStatement.executeUpdate();
-			
+
 			if (i > 0) {
 				System.out.println("Contact Deleted Successfully");
+			} else {
+				System.out.println("No Contact Found with ID : " + id);
 			}
-			 else {
-				System.out.println("No Contact Found with ID : "+ id);
-			 }
 		} catch (Exception e) {
-			
+
 		}
+	}
+
+	public Contact searchByName(String name) {
+		Connection connection = DBConnection.getConnection();
+		try {
+			String query = "SELECT * FROM contacts WHERE name LIKE ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, "%" + name + "%");
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				return new Contact(
+				    rs.getInt("id"),
+	                rs.getString("name"),
+	                rs.getString("phone"),
+	                rs.getString("email")
+					);
+			} else {
+				System.out.println("No Contact Found!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 }

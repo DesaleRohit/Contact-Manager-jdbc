@@ -18,6 +18,7 @@ public class App {
 			System.out.println("1. Add Contact");
 			System.out.println("2. Update Phone");
 			System.out.println("3. Delete Contact");
+			System.out.println("4. Search Name");
 
 			System.out.print("Enter your choice: ");
 
@@ -62,6 +63,18 @@ public class App {
 					
 					dao.deleteContact(did);
 					break;
+					
+				case 4 :
+					System.out.println("Enter the Name : ");
+					String sname = scanner.next();
+					
+					Contact result = dao.searchByName(sname);
+					
+                    if (result != null) {
+                        System.out.println("Found: " + result);
+                    }
+
+                    break;
 			}
 
 		}
