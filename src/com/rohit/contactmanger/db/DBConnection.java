@@ -1,7 +1,6 @@
 package com.rohit.contactmanger.db;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -11,19 +10,24 @@ public class DBConnection {
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 
+	private static Connection connection;
+
 	public static Connection getConnection() {
-		Connection connection = null;
-
 		try {
-			// Step 1. Register MYSQL Driver..
-			Driver driver = new com.mysql.cj.jdbc.Driver();
-			DriverManager.registerDriver(driver);
+			if (connection == null || connection.isClosed()) {
 
-			// Step 2. Create connection..
-			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+				System.out.println("Database connected successfully!");
+			}
 
 		} catch (SQLException e) {
 			System.out.println("Database connection failed!");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("MySQL Driver not found!");
 			e.printStackTrace();
 		}
 
