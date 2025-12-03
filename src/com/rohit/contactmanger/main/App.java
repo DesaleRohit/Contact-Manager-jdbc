@@ -19,6 +19,8 @@ public class App {
 			System.out.println("2. Update Phone");
 			System.out.println("3. Delete Contact");
 			System.out.println("4. Search Name");
+			System.out.println("5. View All Contacts");
+            System.out.println("6. Exit");
 
 			System.out.print("Enter your choice: ");
 
@@ -75,6 +77,20 @@ public class App {
                     }
 
                     break;
+                    
+				case 5 :
+					dao.getAllContacts();
+					
+					break;
+					
+				case 6:
+                    System.out.println("Exiting... Bye!");
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+					
 			}
 
 		}

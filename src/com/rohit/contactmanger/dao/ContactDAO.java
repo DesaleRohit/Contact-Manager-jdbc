@@ -1,7 +1,7 @@
 package com.rohit.contactmanger.dao;
 
-import java.sql.Connection;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -95,4 +95,38 @@ public class ContactDAO {
 		return null;
 
 	}
+	
+	public void getAllContacts() {
+	    Connection con = DBConnection.getConnection();
+
+	    try {
+	        String q = "SELECT * FROM contacts";
+	        PreparedStatement ps = con.prepareStatement(q);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        System.out.println("\nID | Name | Phone | Email");
+	        System.out.println("-----------------------------------");
+
+	        boolean hasData = false;
+
+	        while (rs.next()) {
+	            hasData = true;
+	            System.out.println(
+	                    rs.getInt("id") + " | " +
+	                    rs.getString("name") + " | " +
+	                    rs.getString("phone") + " | " +
+	                    rs.getString("email")
+	            );
+	        }
+
+	        if (!hasData) {
+	            System.out.println("No contacts found!");
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }
+
